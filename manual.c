@@ -1,6 +1,6 @@
 https://user-images.githubusercontent.com/68693691/193665518-0c0c7fec-38a9-4f6c-91ca-fef606abfb0d.png
 
-/*******************************************************************************************************************************/
+/*****************************************************************************************************************************************/
 
 #include <unistd.h>
 #include <stdio.h>
@@ -20,7 +20,7 @@ https://user-images.githubusercontent.com/68693691/193665518-0c0c7fec-38a9-4f6c-
 #include <sys/time.h>
 #include <sys/resource.h>
 
-/*******************************************************************************************************************************/
+/*****************************************************************************************************************************************/
 
 /* BASIC FUNCTIONS */
 
@@ -35,7 +35,7 @@ ssize_t	read(int fildes, void *buf, size_t nbyte);
 char	*strerror(int errnum);
 ssize_t	write(int fildes, const void *buf, size_t nbyte);
 
-/*******************************************************************************************************************************/
+/*****************************************************************************************************************************************/
 
 /* PIPEX : PROCESSES & FILE EXECUTION */
 
@@ -55,7 +55,7 @@ int		unlink(const char *path); // remove a directory entry
 pid_t	wait3(int *wstatus, int options, struct rusage *rusage); // man 2 wait3 - wait for process to change state, BSD style
 pid_t	wait4(pid_t pid, int *wstatus, int options, struct rusage *rusage); // man 2 wait4 - wait for process to change state, BSD style
 
-/*******************************************************************************************************************************/
+/*****************************************************************************************************************************************/
 
 /* MINITALK : SIGNALS */
 
@@ -65,7 +65,7 @@ int		sigemptyset(sigset_t *set); // POSIX signal set operations
 int		sigaction(int sig, const struct sigaction *restrict act, struct sigaction *restrict oact); // examine and change a signal action
 int		kill(pid_t pid, int sig); // send a signal to a process or a group of processes
 
-/*******************************************************************************************************************************/
+/*****************************************************************************************************************************************/
 
 /* FILE related */
 
@@ -75,7 +75,7 @@ int		fstat(int fildes, struct stat *buf); // get file status
 int		stat(const char *restrict path, struct stat *restrict buf); // get file status
 int		lstat(const char *restrict path, struct stat *restrict buf); // get file status
 
-/*******************************************************************************************************************************/
+/*****************************************************************************************************************************************/
 
 /* DIRECTORY related */
 
@@ -92,7 +92,7 @@ DIR				*opendir(const char *name); // open a directory
 struct	dirent	*readdir(DIR *dirp); // read a directory
 int				closedir(DIR *dirp); // close a directory
 
-/*******************************************************************************************************************************/
+/*****************************************************************************************************************************************/
 
 /* terminal (TTY) related */
 
@@ -109,7 +109,7 @@ int		ttyslot(void); // find the slot of the current user's terminal in some file
 int		tcgetattr(int fd, struct termios *termios_p); // get and set terminal attributes, line control, get and set baud rate
 int		tcsetattr(int fd, int optional_actions, const struct termios *termios_p); // get and set terminal attributes, line control, get and set baud rate
 
-/*******************************************************************************************************************************/
+/*****************************************************************************************************************************************/
 
 /* CURSES */
 
@@ -123,7 +123,7 @@ char	*tgetstr(const char *id, char **area); // curses emulation of termcap
 char	*tgoto(const char *cap, int col, int row); // curses emulation of termcap
 int		tputs(const char *str, int affcnt, int (*putc)(int)); // curses interfaces to terminfo database
 
-/*******************************************************************************************************************************/
+/*****************************************************************************************************************************************/
 
 /* MISCELLANIA */
 
@@ -137,7 +137,7 @@ int		ioctl(int fildes, int request, ... /* arg */); // control a STREAMS device 
 char	*getenv(const char *name); // get an environment variable
 
 
-/*******************************************************************************************************************************/
+/*****************************************************************************************************************************************/
 
 /* READLINE & HISTORY */
 
@@ -164,12 +164,7 @@ char	*readline(const char *prompt);
 
 	This  manual  page describes only the most basic use of readline.  Much
 	more functionality is available; see The GNU Readline Library  and  The
-	GNU History Library for additional information.
-
-
-void	rl_clear_history (void); // LOCAL MAN NOT FOUND
-Clear the history list by deleting all of the entries, in the same manner as the History library-s clear_history() function.
-This differs from clear_history because it frees private data Readline saves in the history list. 
+	GNU History Library for additional information. 
 
 int		rl_on_new_line (void); // LOCAL MAN NOT FOUND
 Tell the update functions that we have moved onto a new (empty) line, usually after outputting a newline. 
@@ -181,12 +176,15 @@ If clear_undo is non-zero, the undo list associated with the current line is cle
 void	rl_redisplay (void); // LOCAL MAN NOT FOUND
 Change what-s displayed on the screen to reflect the current contents of rl_line_buffer. 
 
-
-void	add_history (const char *string)
+void	add_history (const char *string);
 	Place string at the end of the history list.  The associated data field
 	(if  any) is set to NULL.  If the maximum number of history entries has
 	been set using stifle_history(), and the new number of history  entries
 	would exceed that maximum, the oldest history entry is removed.
 
+void	rl_clear_history (void); // LOCAL MAN NOT FOUND
+Clear the history list by deleting all of the entries, in the same manner as the History library-s clear_history() function.
+This differs from clear_history because it frees private data Readline saves in the history list.
 
-/*******************************************************************************************************************************/
+
+/*****************************************************************************************************************************************/
