@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lahlsweh <lahlsweh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/18 09:58:49 by lahlsweh          #+#    #+#             */
-/*   Updated: 2024/06/18 11:50:08 by lahlsweh         ###   ########.fr       */
+/*   Created: 2024/06/18 14:09:24 by lahlsweh          #+#    #+#             */
+/*   Updated: 2024/06/18 15:29:26 by lahlsweh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,41 +53,34 @@ char	**split_minishell(char *str)
 			if (str[i] == '<')
 				i++;
 		}
-		else if (str[i] == '\'')
+		else if (str[i] && str[i] != ' ' && str[i] != '\t' && str[i] != '|' && str[i] != '>' && str[i] != '<' && str[i] != '\0')
 		{
 			array[j] = make_word(str + i);
 			j++;
-			i++;
-			while (str[i] && str[i] != '\'')
-				i++;
-			if (str[i])
-				i++;
-		}
-		else if (str[i] == '\"')
-		{
-			array[j] = make_word(str + i);
-			j++;
-			i++;
-			while (str[i] && str[i] != '\"')
-				i++;
-			if (str[i])
-				i++;
-		}
-		else if (str[i] && str[i] != ' ' && str[i] != '\t' && str[i] != '|'
-			&& str[i] != '>' && str[i] != '<' && str[i] != '\0')
-		{
-			array[j] = make_word(str + i);
-			j++;
-			while (str[i] && str[i] != ' ' && str[i] != '\t'
-				&& str[i] != '|' && str[i] != '>' && str[i] != '<')
-				i++;
+			while (str[i] && str[i] != ' ' && str[i] != '\t' && str[i] != '|' && str[i] != '>' && str[i] != '<')
+			{
+				if (str[i] == '\'')
+				{
+					i++;
+					while (str[i] && str[i] != '\'')
+						i++;
+				}
+				if (str[i] == '\"')
+				{
+					i++;
+					while (str[i] && str[i] != '\"')
+						i++;
+				}
+				if (str[i])
+					i++;
+			}
 		}
 	}
 	array[j] = NULL;
 	return (array);
 }
 
-int	count_words(char *str)
+static int	count_words(char *str)
 {
 	int	num_words;
 	int	i;
@@ -117,36 +110,32 @@ int	count_words(char *str)
 				i++;
 			num_words++;
 		}
-		else if (str[i] && str[i] == '\'')
-		{
-			i++;
-			while (str[i] && str[i] != '\'')
-				i++;
-			if (str[i])
-				i++;
-			num_words++;
-		}
-		else if (str[i] && str[i] == '\"')
-		{
-			i++;
-			while (str[i] && str[i] != '\"')
-				i++;
-			if (str[i])
-				i++;
-			num_words++;
-		}
 		else if (str[i] && str[i] != ' ' && str[i] != '\t' && str[i] != '\0')
 		{
-			while (str[i] && str[i] != ' ' && str[i] != '\t'
-				&& str[i] != '|' && str[i] != '>' && str[i] != '<')
-				i++;
+			while (str[i] && str[i] != ' ' && str[i] != '\t' && str[i] != '|' && str[i] != '>' && str[i] != '<')
+			{
+				if (str[i] == '\'')
+				{
+					i++;
+					while (str[i] && str[i] != '\'')
+						i++;
+				}
+				if (str[i] == '\"')
+				{
+					i++;
+					while (str[i] && str[i] != '\"')
+						i++;
+				}
+				if (str[i])
+					i++;
+			}
 			num_words++;
 		}
 	}
 	return (num_words);
 }
 
-char	*make_word(char *str)
+static char	*make_word(char *str)
 {
 	char	*word;
 	int		word_len;
@@ -164,7 +153,7 @@ char	*make_word(char *str)
 	return (word);
 }
 
-int	count_word_len(char *str)
+static int count_word_len(char *str)
 {
 	int	i;
 
@@ -183,25 +172,25 @@ int	count_word_len(char *str)
 		if (str[i] == '<')
 			i = 2;
 	}
-	else if (str[i] == '\'')
-	{
-		i++;
-		while (str[i] && str[i] != '\'')
-			i++;
-		i++;
-	}
-	else if (str[i] == '\"')
-	{
-		i++;
-		while (str[i] && str[i] != '\"')
-			i++;
-		i++;
-	}
 	else
 	{
-		while (str[i] && str[i] != ' ' && str[i] != '\t'
-			&& str[i] != '|' && str[i] != '>' && str[i] != '<')
-			i++;
+		while (str[i] && str[i] != ' ' && str[i] != '\t' && str[i] != '|' && str[i] != '>' && str[i] != '<')
+		{
+			if (str[i] == '\'')
+			{
+				i++;
+				while (str[i] && str[i] != '\'')
+					i++;
+			}
+			if (str[i] == '\"')
+			{
+				i++;
+				while (str[i] && str[i] != '\"')
+					i++;
+			}
+			if (str[i])
+				i++;
+		}
 	}
 	return (i);
 }
