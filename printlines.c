@@ -6,7 +6,7 @@
 /*   By: lahlsweh <lahlsweh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 13:06:32 by lahlsweh          #+#    #+#             */
-/*   Updated: 2024/06/14 13:18:15 by lahlsweh         ###   ########.fr       */
+/*   Updated: 2024/06/18 10:15:13 by lahlsweh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ int	main(void)
 	int	i;
 
 	i = 0;
-	printf("\n");
-	while (i < 100)
+	//printf("\n");
+	while (i < 1)
 	{
-		printf("\t");
+		printf("|\v|");
 		i++;
 	}
 	printf("\n");

@@ -6,7 +6,7 @@
 /*   By: lahlsweh <lahlsweh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 11:56:55 by lahlsweh          #+#    #+#             */
-/*   Updated: 2024/06/16 15:54:36 by lahlsweh         ###   ########.fr       */
+/*   Updated: 2024/06/18 10:17:08 by lahlsweh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ void	parser(char	*line_read)
 	int		i;
 
 	parsed_array = split_minishell(line_read);
+	if (!parsed_array)
+		return ;
 	i = 0;
 	while (parsed_array[i])
 	{
