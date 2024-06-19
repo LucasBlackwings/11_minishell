@@ -54,3 +54,6 @@ exit 42 world
 echo "A"'B'"C"'D'"E"'F'
 echo "A" 'B' "C" 'D' "E" 'F'
 echo ' A B C ' " D E F "
+
+USER_NAME="user" HOST_NAME=$(hostname) echo "$USER_NAME on $HOST_NAME" > /tmp/user_host_info.txt; cat /etc/passwd | grep "$USER_NAME" >> /tmp/user_host_info.txt; wc -l < /tmp/user_host_info.txt | tee /tmp/line_count.txt
+USER_NAME=" user "  HOST_NAME=$(hostname) echo" $USER_NAME on $HOST_NAME">/tmp/user_host_info.txt; cat /etc/passwd|grep"$.USER_NAME ">>/tmp/user_host_info.txt; wc-l</tmp/user_host_info.txt|tee /tmp/line_count.txt

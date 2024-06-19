@@ -1,6 +1,0 @@
-a.out
-build_prompt.c
-main.c
-minishell.h
-NEW_split_minishell.c
-test.txt

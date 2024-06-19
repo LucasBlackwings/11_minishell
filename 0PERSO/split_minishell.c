@@ -6,7 +6,7 @@
 /*   By: lahlsweh <lahlsweh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 14:09:24 by lahlsweh          #+#    #+#             */
-/*   Updated: 2024/06/18 15:29:26 by lahlsweh         ###   ########.fr       */
+/*   Updated: 2024/06/19 13:55:38 by lahlsweh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static int		count_words(char *str);
 static char		*make_word(char *str);
 static int		count_word_len(char *str);
 
-char	**split_minishell(char *str)
+char	**split_minishell_control(char *str)
 {
 	char	**array;
 	int		num_words;
@@ -53,7 +53,7 @@ char	**split_minishell(char *str)
 			if (str[i] == '<')
 				i++;
 		}
-		else if (str[i] && str[i] != ' ' && str[i] != '\t' && str[i] != '|' && str[i] != '>' && str[i] != '<' && str[i] != '\0')
+		else if (str[i])
 		{
 			array[j] = make_word(str + i);
 			j++;
@@ -110,7 +110,7 @@ static int	count_words(char *str)
 				i++;
 			num_words++;
 		}
-		else if (str[i] && str[i] != ' ' && str[i] != '\t' && str[i] != '\0')
+		else if (str[i])
 		{
 			while (str[i] && str[i] != ' ' && str[i] != '\t' && str[i] != '|' && str[i] != '>' && str[i] != '<')
 			{
@@ -153,7 +153,7 @@ static char	*make_word(char *str)
 	return (word);
 }
 
-static int count_word_len(char *str)
+static int	count_word_len(char *str)
 {
 	int	i;
 

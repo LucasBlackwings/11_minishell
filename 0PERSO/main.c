@@ -6,7 +6,7 @@
 /*   By: lahlsweh <lahlsweh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 11:56:55 by lahlsweh          #+#    #+#             */
-/*   Updated: 2024/06/18 10:17:08 by lahlsweh         ###   ########.fr       */
+/*   Updated: 2024/06/19 14:53:25 by lahlsweh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,6 @@ Handle CTRL+C
 Handle CTRL+D
 Handle CTRL+\
 
-DONELIST PROMPT :
-Build prompt (usename + @ + PC ID + PATH + "$ \0")
-basic readline
-add_history only if line_read is not empty
 */
 
 #include "minishell.h"
@@ -28,19 +24,15 @@ void	parser(char	*line_read);
 
 int	main(void)
 {
-	char	*user_env;
-	char	*session_manager_env;
-	char	*pwd_env;
 	char	*prompt;
 	char	*line_read;
 
-	user_env = getenv("USER");
-	session_manager_env = getenv("SESSION_MANAGER");
-	pwd_env = getenv("PWD");
-	prompt = build_prompt(user_env, session_manager_env, pwd_env);
+	prompt = build_prompt_control();
 	while (1)
 	{
 		line_read = readline(prompt);
+		if (!line_read) // add
+			return (free(prompt), 1); //add
 		if (*line_read)
 		{
 			add_history(line_read);
@@ -57,10 +49,8 @@ void	parser(char	*line_read)
 {
 	char	**parsed_array;
 	int		i;
-
-	parsed_array = split_minishell(line_read);
-	if (!parsed_array)
-		return ;
+	
+	parsed_array = split_minishell_control(line_read);
 	i = 0;
 	while (parsed_array[i])
 	{
