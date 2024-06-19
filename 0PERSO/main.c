@@ -6,7 +6,7 @@
 /*   By: lahlsweh <lahlsweh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 11:56:55 by lahlsweh          #+#    #+#             */
-/*   Updated: 2024/06/19 14:53:25 by lahlsweh         ###   ########.fr       */
+/*   Updated: 2024/06/19 15:14:44 by lahlsweh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,6 @@ int	main(void)
 	while (1)
 	{
 		line_read = readline(prompt);
-		if (!line_read) // add
-			return (free(prompt), 1); //add
 		if (*line_read)
 		{
 			add_history(line_read);
@@ -49,7 +47,7 @@ void	parser(char	*line_read)
 {
 	char	**parsed_array;
 	int		i;
-	
+
 	parsed_array = split_minishell_control(line_read);
 	i = 0;
 	while (parsed_array[i])

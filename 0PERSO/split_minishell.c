@@ -6,7 +6,7 @@
 /*   By: lahlsweh <lahlsweh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 14:09:24 by lahlsweh          #+#    #+#             */
-/*   Updated: 2024/06/19 13:55:38 by lahlsweh         ###   ########.fr       */
+/*   Updated: 2024/06/19 15:14:46 by lahlsweh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ char	**split_minishell_control(char *str)
 			if (str[i] == '<')
 				i++;
 		}
-		else if (str[i])
+		else if (str[i] && str[i] != ' ' && str[i] != '\t' && str[i] != '|' && str[i] != '>' && str[i] != '<' && str[i] != '\0')
 		{
 			array[j] = make_word(str + i);
 			j++;
@@ -110,7 +110,7 @@ static int	count_words(char *str)
 				i++;
 			num_words++;
 		}
-		else if (str[i])
+		else if (str[i] && str[i] != ' ' && str[i] != '\t' && str[i] != '\0')
 		{
 			while (str[i] && str[i] != ' ' && str[i] != '\t' && str[i] != '|' && str[i] != '>' && str[i] != '<')
 			{
