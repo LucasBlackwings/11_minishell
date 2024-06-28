@@ -6,7 +6,7 @@
 /*   By: lahlsweh <lahlsweh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 12:35:06 by lahlsweh          #+#    #+#             */
-/*   Updated: 2024/06/19 12:40:32 by lahlsweh         ###   ########.fr       */
+/*   Updated: 2024/06/28 10:11:25 by lahlsweh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,10 @@
 # define FALSE 0
 # define TRUE 1
 
+void	parser(char	*line_read);
 char	*build_prompt_control(void);
-char	**split_minishell_control(char *str);
+char	**parsing_split_control(char *str);
+void	parsing_trimmer(char **parsed_array);
+void	parsing_interpreter(char **parsed_array);
 
 #endif

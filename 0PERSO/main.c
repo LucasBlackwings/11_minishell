@@ -6,21 +6,22 @@
 /*   By: lahlsweh <lahlsweh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 11:56:55 by lahlsweh          #+#    #+#             */
-/*   Updated: 2024/06/19 15:14:44 by lahlsweh         ###   ########.fr       */
+/*   Updated: 2024/06/28 10:27:09 by lahlsweh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*
+CURRENT PROGRAM DOES NOT HANDLE NORM
+				DOES NOT HANDLE PROTECTIONS
+No leak should be observed except in case of crashing unprotected functions
+
 TODOLIST PROMPT :
 Handle CTRL+C
 Handle CTRL+D
 Handle CTRL+\
-
 */
 
 #include "minishell.h"
-
-void	parser(char	*line_read);
 
 int	main(void)
 {
@@ -48,11 +49,12 @@ void	parser(char	*line_read)
 	char	**parsed_array;
 	int		i;
 
-	parsed_array = split_minishell_control(line_read);
+	parsed_array = parsing_split_control(line_read);
+	parsing_trimmer(parsed_array);
+	parsing_interpreter(parsed_array);
 	i = 0;
 	while (parsed_array[i])
 	{
-		printf("[%d] %s\n", i, parsed_array[i]);
 		free(parsed_array[i]);
 		i++;
 	}

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   split_minishell.c                                  :+:      :+:    :+:   */
+/*   parsing_split.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lahlsweh <lahlsweh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 14:09:24 by lahlsweh          #+#    #+#             */
-/*   Updated: 2024/06/19 15:14:46 by lahlsweh         ###   ########.fr       */
+/*   Updated: 2024/06/28 11:23:01 by lahlsweh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static int		count_words(char *str);
 static char		*make_word(char *str);
 static int		count_word_len(char *str);
 
-char	**split_minishell_control(char *str)
+char	**parsing_split_control(char *str)
 {
 	char	**array;
 	int		num_words;
