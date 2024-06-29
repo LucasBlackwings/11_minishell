@@ -6,7 +6,7 @@
 /*   By: lahlsweh <lahlsweh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 10:11:40 by lahlsweh          #+#    #+#             */
-/*   Updated: 2024/06/29 13:40:56 by lahlsweh         ###   ########.fr       */
+/*   Updated: 2024/06/29 15:13:53 by lahlsweh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 /*
 TODOLIST :
 
-Single quoting does not handle escape characters neither $
-Double quoting should handle escape characters, $variable and $(function)
+Single quoting does not handle $
+Double quoting should handle $variable
 */
 
 void	parsing_trimmer(char **array)
@@ -47,5 +47,6 @@ void	parsing_trimmer(char **array)
 		}
 		i++;
 	}
+	array = NULL;
 	return ;
 }

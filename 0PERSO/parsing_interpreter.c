@@ -6,21 +6,11 @@
 /*   By: lahlsweh <lahlsweh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/22 10:56:31 by lahlsweh          #+#    #+#             */
-/*   Updated: 2024/06/29 13:29:24 by lahlsweh         ###   ########.fr       */
+/*   Updated: 2024/06/29 15:17:17 by lahlsweh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*
-FEATURES LIST :
-
-
-EACH COMMAND IN A PIPELINE RUNS IN A SUBSHELL
-Subshells in Bash are processes that  provide an isolated environment for command execution.
-They inherit the environment and exported variables from the parent shell but do not propagate changes back to the parent shell.
-They also have their own process IDs, file descriptors, and trap commands, among other attributes. 
-In minishell : Only '|' can create subshells. In real bash, more tokens can be used for that purpose.
-
-GRAMMAR RULES :
+/*GRAMMAR RULES :
 
 ANY '>' '>>' '<' '<<' followed by ANY '>' '>>' '<' '<<' will lead to syntax error
 ANY single token '|' '>' '>>' '<' '<<' will lead to syntax error;
@@ -173,8 +163,8 @@ int	check_bad_inbuilts_syntax(char **array)
 		{
 			i += unbuilt_unset_syntax(array, i);
 		}
-		else if (array[i][0] == 'e' && array[i][1] == 'x' && array[i][2] == 'p'
-				&& array[i][3] == 'o' && array[i][4] == 'r' && array[i][5] == 't' && array[i][6] == '\0')
+		else if (array[i][0] == 'e' && array[i][1] == 'x' && array[i][2] == 'p' && array[i][3] == 'o'
+				&& array[i][4] == 'r' && array[i][5] == 't' && array[i][6] == '\0')
 		{
 			i += unbuilt_export_syntax(array, i);
 		}
