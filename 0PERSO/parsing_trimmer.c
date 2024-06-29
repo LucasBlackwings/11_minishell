@@ -6,20 +6,17 @@
 /*   By: lahlsweh <lahlsweh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 10:11:40 by lahlsweh          #+#    #+#             */
-/*   Updated: 2024/06/28 12:18:27 by lahlsweh         ###   ########.fr       */
+/*   Updated: 2024/06/29 13:40:56 by lahlsweh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-/*
-This feature is a prototype. It may or may not be removed lated.
-Do not add more functions in this file.
-*/
 
 #include "minishell.h"
 
 /*
-This function trims all quotes and double wquotes from each words in array
-And adjust word size (position of '\0') accordingly
+TODOLIST :
+
+Single quoting does not handle escape characters neither $
+Double quoting should handle escape characters, $variable and $(function)
 */
 
 void	parsing_trimmer(char **array)

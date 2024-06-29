@@ -6,12 +6,13 @@
 /*   By: lahlsweh <lahlsweh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 12:34:36 by lahlsweh          #+#    #+#             */
-/*   Updated: 2024/06/19 15:14:48 by lahlsweh         ###   ########.fr       */
+/*   Updated: 2024/06/29 11:57:42 by lahlsweh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+static char	*trim_pwd_env_if_home_user(char	*user_env, char *pwd_env);
 static char	*trim_session_manager_env(void);
 static int	count_prompt_len(char *user_env, char *session_manager_env, char *pwd_env);
 static char	*build_prompt(char *user_env, char *session_manager_env, char *pwd_env, int prompt_len);
@@ -26,10 +27,33 @@ char	*build_prompt_control(void)
 
 	user_env = getenv("USER");
 	pwd_env = getenv("PWD");
+	pwd_env = trim_pwd_env_if_home_user(user_env, pwd_env);
 	session_manager_env = trim_session_manager_env();
 	prompt_len = count_prompt_len(user_env, session_manager_env, pwd_env);
 	prompt = build_prompt(user_env, session_manager_env, pwd_env, prompt_len);
 	return (prompt);
+}
+
+char	*trim_pwd_env_if_home_user(char *user_env, char *pwd_env)
+{
+	int	user_env_len;
+	int	i;
+
+	if (pwd_env[0] == '/' && pwd_env[1] == 'h' && pwd_env[2] == 'o' && pwd_env[3] == 'm' && pwd_env[4] == 'e' && pwd_env[5] == '/')
+	{
+		user_env_len = 0;
+		while (user_env[user_env_len])
+			user_env_len++;
+		i = 6;
+		while (i - 6 < user_env_len && pwd_env[i] == user_env[i - 6])
+			i++;
+		if (user_env[i - 6] == '\0')
+		{
+			pwd_env += i - 1;
+			pwd_env[0] = '~';
+		}
+	}
+	return (pwd_env);
 }
 
 char	*trim_session_manager_env(void)
