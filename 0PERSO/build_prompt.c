@@ -6,7 +6,7 @@
 /*   By: lahlsweh <lahlsweh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 12:34:36 by lahlsweh          #+#    #+#             */
-/*   Updated: 2024/06/29 11:57:42 by lahlsweh         ###   ########.fr       */
+/*   Updated: 2024/07/01 11:48:19 by lahlsweh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ char	*build_prompt_control(void)
 	return (prompt);
 }
 
-char	*trim_pwd_env_if_home_user(char *user_env, char *pwd_env)
+static char	*trim_pwd_env_if_home_user(char *user_env, char *pwd_env)
 {
 	int	user_env_len;
 	int	i;
@@ -56,7 +56,7 @@ char	*trim_pwd_env_if_home_user(char *user_env, char *pwd_env)
 	return (pwd_env);
 }
 
-char	*trim_session_manager_env(void)
+static char	*trim_session_manager_env(void)
 {
 	char	*session_manager_env;
 	int		i;

@@ -6,7 +6,7 @@
 /*   By: lahlsweh <lahlsweh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/22 10:56:31 by lahlsweh          #+#    #+#             */
-/*   Updated: 2024/06/29 15:17:17 by lahlsweh         ###   ########.fr       */
+/*   Updated: 2024/07/01 14:39:06 by lahlsweh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ ANY command starting with '|' will lead to syntax error;
 >>|		bash: syntax error near unexpected token `|'			token '|' after other token
 <<|		bash: syntax error near unexpected token `|'			token '|' after other token
 <<<|	bash: syntax error near unexpected token `|'			token '|' after other token
->|		bash: syntax error near unexpected token `newline'		token '>|' at end of file (IMPLEMENT '|' INSTEAD)
+>|		bash: syntax error near unexpected token `newline'		token '>|' at end of file (IMPLEMENT '|' INSTEAD)key=value
 
 |		bash: syntax error near unexpected token `|'			
 ||		bash: syntax error near unexpected token `||'			token '||' after other token (IMPLEMENT '|' INSTEAD)
@@ -72,7 +72,9 @@ env
 #include "minishell.h"
 
 static int	check_bad_token_syntax(char **array, int array_len);
-static int	check_bad_inbuilts_syntax(char **array);
+//static int	check_bad_regular_var_syntax(char **array);
+static void	parsing_trimmer(char **array);
+//static int	check_bad_inbuilts_syntax(char **array);
 
 void	parsing_interpreter(char **array)
 {
@@ -80,28 +82,43 @@ void	parsing_interpreter(char **array)
 	int	array_len;
 
 	i = 0;
+	printf("\n");
+	while (array[i])
+	{
+		printf("[%d] %s\n", i, array[i]);
+		i++;
+	}
+	printf("[%d] %s |\n\n", i, array[i]);
+	array_len = i;
+	if ((check_bad_token_syntax(array, array_len)) == -1)
+		return ;
+	//if ((check_bad_inbuilts_syntax(array)) == -1)
+	//	return ;
+	/*****************************/
+	//if ((check_bad_regular_var_syntax(array)) == -1)
+	//	return ;
+	parsing_trimmer(array);
+	/*****************************/
+	i = 0;
+	printf("\n");
 	while (array[i])
 	{
 		printf("[%d] %s\n", i, array[i]);
 		i++;
 	}
 	printf("[%d] %s |\n", i, array[i]);
-	array_len = i;
-	printf("array_len : %d\n", array_len);
-	if ((check_bad_token_syntax(array, array_len)) == -1)
-		return ;
-	if ((check_bad_inbuilts_syntax(array)) == -1)
-		return ;
 	return ;
 }
 
-int	check_bad_token_syntax(char **array, int array_len)
+static int	check_bad_token_syntax(char **array, int array_len)
 {
 	int	i;
 
 	i = 0;
 	if (array_len == 0)
 		return (0);
+	if (array[0][0] == '|')
+		return (printf("bash: syntax error near unexpected token `|'\n"), -1);
 	while (array[i] && array[i + 1])
 	{
 		if (array[i][0] == '|' || array[i][0] == '>' || array[i][0] == '<')
@@ -126,7 +143,61 @@ int	check_bad_token_syntax(char **array, int array_len)
 	return (0);
 }
 
-int	check_bad_inbuilts_syntax(char **array)
+/*static int	check_bad_regular_var_syntax(char **array)
+{
+	//int	flag_var;
+	int	i;
+	int	j;
+
+	i = 0;
+	
+	while (array[i])
+	{
+		j = 0;
+		while (array[i][j])
+		{
+			
+			printf("array[%d][%d] : %c\n", i, j, array[i][j]);
+			j++;
+		}
+		i++;
+	}
+	return (0);
+}*/
+
+static void	parsing_trimmer(char **array)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (array[i])
+	{
+		j = 0;
+		while (array[i][j])
+		{
+			if (array[i][j] == '\'' || array[i][j] == '\"')
+			{
+				while (array[i][j + 1])
+				{
+					array[i][j] = array[i][j + 1];
+					j++;
+				}
+				array[i][j] = '\0';
+				j = 0;
+			}
+			else
+			{
+				j++;
+			}
+		}
+		i++;
+	}
+	array = NULL;
+	return ;
+}
+
+/*static int	check_bad_inbuilts_syntax(char **array)
 {
 	int	i;
 
@@ -171,5 +242,5 @@ int	check_bad_inbuilts_syntax(char **array)
 		if (array[i])
 			i++;
 	}
-	return (1);
-}
+	return (0);
+}*/

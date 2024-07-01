@@ -1,5 +1,11 @@
 https://user-images.githubusercontent.com/68693691/193665518-0c0c7fec-38a9-4f6c-91ca-fef606abfb0d.png
 
+
+
+/*Funny commands :
+> grep echo grep && < grep grep grep | cat
+*/
+
 /*****************************************************************************************************************************************/
 
 #include <unistd.h>

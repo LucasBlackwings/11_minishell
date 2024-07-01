@@ -6,7 +6,7 @@
 /*   By: lahlsweh <lahlsweh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 11:56:55 by lahlsweh          #+#    #+#             */
-/*   Updated: 2024/06/29 15:57:02 by lahlsweh         ###   ########.fr       */
+/*   Updated: 2024/07/01 11:29:43 by lahlsweh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	parser(char	*line_read)
 	int		i;
 
 	parsed_array = parsing_split_control(line_read);
-	parsing_trimmer(parsed_array);
+	//parsing_trimmer(parsed_array);
 	parsing_interpreter(parsed_array);
 	i = 0;
 	while (parsed_array[i])
