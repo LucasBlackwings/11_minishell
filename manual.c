@@ -4,6 +4,8 @@ https://user-images.githubusercontent.com/68693691/193665518-0c0c7fec-38a9-4f6c-
 
 /*Funny commands :
 > grep echo grep && < grep grep grep | cat
+grep < output -V < output2 -E < output3 -i
+grep > output -V > output2 -E > output3 -i
 */
 
 /*****************************************************************************************************************************************/

@@ -6,7 +6,7 @@
 /*   By: lahlsweh <lahlsweh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/22 10:56:31 by lahlsweh          #+#    #+#             */
-/*   Updated: 2024/07/01 14:39:06 by lahlsweh         ###   ########.fr       */
+/*   Updated: 2024/07/02 15:17:26 by lahlsweh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,56 +67,71 @@ cd		[directory] // relative OR absolute path
 Commands that takes no arguments :
 pwd
 env
+
+CORRECT SYNTAXES :
+ls > file1 -n > file2 -l > file3 -h
+
 */
 
 #include "minishell.h"
 
-static int	check_bad_token_syntax(char **array, int array_len);
-//static int	check_bad_regular_var_syntax(char **array);
+#define END_OF_LIST 0
+#define PIPE 1
+#define REDIR_OUT 2 
+#define REDIR_IN 3
+#define APPEND_REDIR_OUT 4
+#define HERE_DOC 5
+#define FILE_OR_COMMAND 6
+#define ARG_OR_OPTION 7
+#define UNKNOWN -1
+
+static int	check_token_syntax(char **array);
+static void	build_tokens_list(char **array, int *list_words);
 static void	parsing_trimmer(char **array);
-//static int	check_bad_inbuilts_syntax(char **array);
+static int	check_file_syntax(char **array, int *list_words);
+static int	check_bad_inbuilts_syntax(char **array);
 
 void	parsing_interpreter(char **array)
 {
+	int *list_words;
 	int	i;
-	int	array_len;
 
 	i = 0;
 	printf("\n");
-	while (array[i])
-	{
-		printf("[%d] %s\n", i, array[i]);
-		i++;
-	}
-	printf("[%d] %s |\n\n", i, array[i]);
-	array_len = i;
-	if ((check_bad_token_syntax(array, array_len)) == -1)
-		return ;
-	//if ((check_bad_inbuilts_syntax(array)) == -1)
-	//	return ;
-	/*****************************/
-	//if ((check_bad_regular_var_syntax(array)) == -1)
-	//	return ;
-	parsing_trimmer(array);
-	/*****************************/
-	i = 0;
-	printf("\n");
+	printf("END_OF_LIST 0\nPIPE 1\nREDIR_OUT 2\nREDIR_IN 3\nAPPEND_REDIR_OUT 4\nHERE_DOC 5\nFILE_OR_COMMAND 6\nARG_OR_OPTION 7\nUNKNOWN -1\n\n");
 	while (array[i])
 	{
 		printf("[%d] %s\n", i, array[i]);
 		i++;
 	}
 	printf("[%d] %s |\n", i, array[i]);
+	if ((check_token_syntax(array)) == -1)
+		return ;
+	list_words = (int *)malloc((i + 1) * sizeof(int *));
+	list_words[i] = END_OF_LIST;
+	build_tokens_list(array, list_words);
+	parsing_trimmer(array);
+	i = 0;
+	printf("\n");
+	while (array[i])
+	{
+		printf("{%d} [%d] %s\n", list_words[i], i, array[i]);
+		i++;
+	}
+	printf("{%d} [%d] %s\n\n", list_words[i], i, array[i]);
+	if ((check_file_syntax(array, list_words)) == -1)
+		return ;
+	//if ((check_bad_inbuilts_syntax(array)) == -1)
+	//	return ;
+	free(list_words);
 	return ;
 }
 
-static int	check_bad_token_syntax(char **array, int array_len)
+static int	check_token_syntax(char **array)
 {
 	int	i;
 
 	i = 0;
-	if (array_len == 0)
-		return (0);
 	if (array[0][0] == '|')
 		return (printf("bash: syntax error near unexpected token `|'\n"), -1);
 	while (array[i] && array[i + 1])
@@ -136,34 +151,56 @@ static int	check_bad_token_syntax(char **array, int array_len)
 		}
 		i++;
 	}
-	if (array[array_len - 1][0] == '>' || array[array_len - 1][0] == '<')
+	if (array[i][0] == '>' || array[i][0] == '<')
 		return (printf("bash: syntax error near unexpected token `newline'\n"), -1);
-	if (array[array_len - 1][0] == '|' && array_len == 1)
+	if (array[i][0] == '|' && i == 1)
 		return (printf("bash: syntax error near unexpected token `|'\n"), -1);
 	return (0);
 }
 
-/*static int	check_bad_regular_var_syntax(char **array)
+static void	build_tokens_list(char **array, int *list_words)
 {
-	//int	flag_var;
 	int	i;
-	int	j;
+	int	last_token_position;
+	int	i_recall;
 
 	i = 0;
-	
 	while (array[i])
 	{
-		j = 0;
-		while (array[i][j])
-		{
-			
-			printf("array[%d][%d] : %c\n", i, j, array[i][j]);
-			j++;
-		}
+		if (array[i][0] == '|' && array[i][1] == '\0')
+			list_words[i] = PIPE;
+		else if (array[i][0] == '>' && array[i][1] == '\0')
+			list_words[i] = REDIR_OUT;
+		else if (array[i][0] == '<' && array[i][1] == '\0')
+			list_words[i] = REDIR_IN;
+		else if (array[i][0] == '>' && array[i][1] == '>' && array[i][2] == '\0')
+			list_words[i] = APPEND_REDIR_OUT;
+		else if (array[i][0] == '<' && array[i][1] == '<' && array[i][2] == '\0')
+			list_words[i] = HERE_DOC;
+		else
+			list_words[i] = UNKNOWN;
 		i++;
 	}
-	return (0);
-}*/
+	last_token_position = -1;
+	i_recall = 0;
+	i = 0;
+	while (list_words[i])
+	{
+		if (list_words[i] != PIPE && list_words[i] != REDIR_OUT && list_words[i] != REDIR_IN && list_words[i] != APPEND_REDIR_OUT)
+		{
+			list_words[i] = FILE_OR_COMMAND;
+			i++;
+		}
+		while (list_words[i] && list_words[i] != PIPE && list_words[i] != REDIR_OUT && list_words[i] != REDIR_IN && list_words[i] != APPEND_REDIR_OUT)
+		{
+			list_words[i] = ARG_OR_OPTION;
+			i++;
+		}
+		if (list_words[i])
+			i++;
+	}
+	return ;
+}
 
 static void	parsing_trimmer(char **array)
 {
@@ -197,7 +234,37 @@ static void	parsing_trimmer(char **array)
 	return ;
 }
 
-/*static int	check_bad_inbuilts_syntax(char **array)
+static int	check_file_syntax(char **array, int *list_words)
+{
+	char	*path_env;
+	char	**path_array;
+	int		i;
+	
+	if ((check_bad_inbuilts_syntax(array)) == -1)
+		return (-1);
+	path_env = getenv("PATH");
+	path_array = mini_split(path_env, ':');
+	i = 0;
+	while (path_array[i])
+	{
+		printf("[%d] %s\n", i, path_array[i]);
+		i++;
+	}
+	printf("[%d] %s |\n", i, path_array[i]);
+	// Look for PATH file
+	// Look for CWD file
+	while (path_array[i])
+	{
+		free(path_array[i]);
+		i++;
+	}
+	free(path_array);
+	array = NULL;
+	list_words = NULL;
+	return (0);
+}
+
+static int	check_bad_inbuilts_syntax(char **array)
 {
 	int	i;
 
@@ -243,4 +310,4 @@ static void	parsing_trimmer(char **array)
 			i++;
 	}
 	return (0);
-}*/
+}

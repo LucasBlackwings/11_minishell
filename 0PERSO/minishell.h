@@ -6,7 +6,7 @@
 /*   By: lahlsweh <lahlsweh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 12:35:06 by lahlsweh          #+#    #+#             */
-/*   Updated: 2024/07/01 11:47:54 by lahlsweh         ###   ########.fr       */
+/*   Updated: 2024/07/02 15:08:13 by lahlsweh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ void	parser(char	*line_read);
 char	*build_prompt_control(void);
 char	**parsing_split_control(char *str);
 void	parsing_interpreter(char **array);
+
+char	**mini_split(char *str, char c);
 
 int		unbuilt_echo_syntax(char **array, int i);
 int		unbuilt_export_syntax(char **array, int i);
