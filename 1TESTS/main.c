@@ -1,16 +1,58 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libtf_utils.c                                      :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lahlsweh <lahlsweh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/03 10:29:03 by lahlsweh          #+#    #+#             */
-/*   Updated: 2024/07/03 10:44:12 by lahlsweh         ###   ########.fr       */
+/*   Created: 2024/07/03 11:44:50 by lahlsweh          #+#    #+#             */
+/*   Updated: 2024/07/03 13:27:08 by lahlsweh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include <stdio.h>
+#include <stdlib.h>
+
+char	*ft_strcstrjoin(const char *s1, const char c2, const char *s3);
+void	*ft_calloc(size_t nmemb, size_t size);
+void	ft_bzero(void *s, size_t n);
+size_t	ft_strlcat(char *dst, const char *src, size_t size);
+
+int	main(void)
+{
+	char	s1[] = "/home/lahlsweh/bin";
+	char	c2 = '/';
+	char	s3[] = "grep";
+	char	*path;
+
+	path = ft_strcstrjoin(s1, c2, s3);
+	printf("%s\n", path);
+	free(path);
+	return (0);
+}
+
+char	*ft_strcstrjoin(const char *s1, const char c2, const char *s3)
+{
+	char	*calloc_ptr;
+	int		s1_len;
+	int		s3_len;
+
+	if (!s1 || !s3)
+		return (NULL);
+	s1_len = 0;
+	s3_len = 0;
+	while (s1[s1_len])
+		s1_len++;
+	while (s3[s3_len])
+		s3_len++;
+	calloc_ptr = (char *)ft_calloc(s1_len + 1 + s3_len + 1, sizeof(char));
+	if (!calloc_ptr)
+		return (NULL);
+	ft_strlcat(calloc_ptr, s1, s1_len + 1);
+	calloc_ptr[s1_len] = c2;
+	ft_strlcat(calloc_ptr, s3, s1_len + 1 + s3_len + 1);
+	return (calloc_ptr);
+}
 
 void	*ft_calloc(size_t nmemb, size_t size)
 {
@@ -42,56 +84,6 @@ void	ft_bzero(void *s, size_t n)
 		n--;
 	}
 }
-
-char	*ft_strjoin(const char *s1, const char *s2)
-{
-	int		s1_len;
-	int		s2_len;
-	char	*calloc_ptr;
-
-	if (!s1 || !s2)
-		return (NULL);
-	s1_len = 0;
-	s2_len = 0;
-	while (s1[s1_len])
-		s1_len++;
-	while (s2[s2_len])
-		s2_len++;
-	calloc_ptr = (char *)ft_calloc(s1_len + s2_len + 1, sizeof(char));
-	if (!calloc_ptr)
-		return (NULL);
-	ft_strlcat(calloc_ptr, s1, s1_len + 1);
-	ft_strlcat(calloc_ptr, s2, s1_len + s2_len + 1);
-	return (calloc_ptr);
-}
-
-char	*ft_str3join(const char *s1, const char *s2, const char *s3)
-{
-	int		s1_len;
-	int		s2_len;
-	int		s3_len;
-	char	*calloc_ptr;
-
-	if (!s1 || !s2 || !s3)
-		return (NULL);
-	s1_len = 0;
-	s2_len = 0;
-	s3_len = 0;
-	while (s1[s1_len])
-		s1_len++;
-	while (s2[s2_len])
-		s2_len++;
-	while (s3[s3_len])
-		s3_len++;
-	calloc_ptr = (char *)ft_calloc(s1_len + s2_len + s3_len + 1, sizeof(char));
-	if (!calloc_ptr)
-		return (NULL);
-	ft_strlcat(calloc_ptr, s1, s1_len + 1);
-	ft_strlcat(calloc_ptr, s2, s1_len + s2_len + 1);
-	ft_strlcat(calloc_ptr, s3, s1_len + s2_len + s3_len + 1);
-	return (calloc_ptr);
-}
-
 
 size_t	ft_strlcat(char *dst, const char *src, size_t size)
 {

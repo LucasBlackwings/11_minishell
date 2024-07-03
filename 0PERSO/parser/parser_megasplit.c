@@ -1,22 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing_split.c                                    :+:      :+:    :+:   */
+/*   parser_megasplit.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lahlsweh <lahlsweh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 14:09:24 by lahlsweh          #+#    #+#             */
-/*   Updated: 2024/07/03 10:46:57 by lahlsweh         ###   ########.fr       */
+/*   Updated: 2024/07/03 14:03:04 by lahlsweh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
-static int		count_words(char *str);
-static char		*make_word(char *str);
-static int		count_word_len(char *str);
-
-char	**parsing_split_control(char *str)
+char	**parsing_megasplit_control(char *str)
 {
 	char	**array;
 	int		num_words;
@@ -80,7 +76,7 @@ char	**parsing_split_control(char *str)
 	return (array);
 }
 
-static int	count_words(char *str)
+int	count_words(char *str)
 {
 	int	num_words;
 	int	i;
@@ -118,8 +114,7 @@ static int	count_words(char *str)
 				{
 					i++;
 					while (str[i] && str[i] != '\'')
-						i++;		//filepath = ft_strjoin(array_of_paths[i], "/");
-		//filepath = ft_strjoin(filepath, filename);
+						i++;
 				}
 				if (str[i] == '\"')
 				{
@@ -136,7 +131,7 @@ static int	count_words(char *str)
 	return (num_words);
 }
 
-static char	*make_word(char *str)
+char	*make_word(char *str)
 {
 	char	*word;
 	int		word_len;
@@ -154,7 +149,7 @@ static char	*make_word(char *str)
 	return (word);
 }
 
-static int	count_word_len(char *str)
+int	count_word_len(char *str)
 {
 	int	i;
 

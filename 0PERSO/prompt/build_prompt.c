@@ -6,16 +6,11 @@
 /*   By: lahlsweh <lahlsweh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 12:34:36 by lahlsweh          #+#    #+#             */
-/*   Updated: 2024/07/02 14:44:44 by lahlsweh         ###   ########.fr       */
+/*   Updated: 2024/07/03 14:01:53 by lahlsweh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-
-static char	*trim_pwd_env_if_home_user(char	*user_env, char *pwd_env);
-static char	*trim_session_manager_env(void);
-static int	count_prompt_len(char *user_env, char *session_manager_env, char *pwd_env);
-static char	*build_prompt(char *user_env, char *session_manager_env, char *pwd_env, int prompt_len);
+#include "../minishell.h"
 
 char	*build_prompt_control(void)
 {
@@ -34,7 +29,7 @@ char	*build_prompt_control(void)
 	return (prompt);
 }
 
-static char	*trim_pwd_env_if_home_user(char *user_env, char *pwd_env)
+char	*trim_pwd_env_if_home_user(char *user_env, char *pwd_env)
 {
 	int	user_env_len;
 	int	i;
@@ -56,7 +51,7 @@ static char	*trim_pwd_env_if_home_user(char *user_env, char *pwd_env)
 	return (pwd_env);
 }
 
-static char	*trim_session_manager_env(void)
+char	*trim_session_manager_env(void)
 {
 	char	*session_manager_env;
 	int		i;
@@ -72,7 +67,7 @@ static char	*trim_session_manager_env(void)
 	return (session_manager_env);
 }
 
-static int	count_prompt_len(char *user_env, char *session_manager_env, char *pwd_env)
+int	count_prompt_len(char *user_env, char *session_manager_env, char *pwd_env)
 {
 	int		user_env_len;
 	int		session_manager_env_len;
@@ -93,7 +88,7 @@ static int	count_prompt_len(char *user_env, char *session_manager_env, char *pwd
 	return (prompt_len);
 }
 
-static char	*build_prompt(char *user_env, char *session_manager_env, char *pwd_env, int prompt_len)
+char	*build_prompt(char *user_env, char *session_manager_env, char *pwd_env, int prompt_len)
 {
 	char	*prompt;
 	int		i;

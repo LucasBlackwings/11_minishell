@@ -1,18 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mini_split.c                                       :+:      :+:    :+:   */
+/*   utils_minisplit.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lahlsweh <lahlsweh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 14:57:15 by lahlsweh          #+#    #+#             */
-/*   Updated: 2024/07/02 15:12:40 by lahlsweh         ###   ########.fr       */
+/*   Updated: 2024/07/03 14:12:42 by lahlsweh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-
-static char	*make_word(char *str, char c);
+#include "../minishell.h"
 
 char	**mini_split(char *str, char c)
 {
@@ -37,7 +35,7 @@ char	**mini_split(char *str, char c)
 	{
 		if (str[i] != c)
 		{
-			array[j] = make_word(str + i, c);
+			array[j] = mini_make_word(str + i, c);
 			j++;
 			while (str[i] && str[i] != c)
 				i++;
@@ -49,7 +47,7 @@ char	**mini_split(char *str, char c)
 	return (array);
 }
 
-static char	*make_word(char *str, char c)
+char	*mini_make_word(char *str, char c)
 {
 	char	*word;
 	int		i;

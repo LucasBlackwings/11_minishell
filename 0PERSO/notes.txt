@@ -1,0 +1,72 @@
+
+CURRENT PROGRAM DOES NOT HANDLE NORM
+				DOES NOT HANDLE PROTECTIONS
+No leak should be observed except in case of crashing unprotected functions
+
+TODOLIST PROMPT :
+Handle CTRL+C
+Handle CTRL+D
+Handle CTRL+\
+
+
+
+GRAMMAR RULES :
+
+ANY '>' '>>' '<' '<<' followed by ANY '>' '>>' '<' '<<' will lead to syntax error
+ANY single token '|' '>' '>>' '<' '<<' will lead to syntax error;
+ANY command ending with '>' '>>' '<' '<<' will lead to syntax error.
+ANY command starting with '|' will lead to syntax error;
+
+||	is a bash token that must be ignored
+<>	is a bash token that must be ignored
+<<<	is a bash token that must be ignored
+>|	is a bash token that must be ignored
+
+>		bash: syntax error near unexpected token `newline'		token '>' at end of file
+>>		bash: syntax error near unexpected token `newline'		token '>>' at end of file
+<		bash: syntax error near unexpected token `newline'		token '<' at end of file
+<<		bash: syntax error near unexpected token `newline'		token '<<' at end of file
+
+>>>		bash: syntax error near unexpected token `>'			token '>' after other token
+>>>|	bash: syntax error near unexpected token `>|'			token '>|' after other token (IMPLEMENT '>' INSTEAD)
+<>|		bash: syntax error near unexpected token `|'			token '|' after other token (IMPLEMENT '>' INSTEAD)
+
+>>>>	bash: syntax error near unexpected token `>>'			token '>>' after other token
+>>>>|	bash: syntax error near unexpected token `>>'			token '>>' after other token
+>>>>>	bash: syntax error near unexpected token `>>'			token '>>' after other token
+
+><|		bash: syntax error near unexpected token `<'			token '<' after other token
+<<<		bash: syntax error near unexpected token `newline'		token '<<<' at end of file (IMPLEMENT '<' INSTEAD)
+
+<<<<<	bash: syntax error near unexpected token `<<'			token '<<' after other token
+<<<<	bash: syntax error near unexpected token `<'			token '<' after other token (IMPLEMENT '<<' INSTEAD)
+<<<<|	bash: syntax error near unexpected token `<'			token '<' after other token (IMPLEMENT '<<' INSTEAD)
+<<<<<<	bash: syntax error near unexpected token `<<<'			token '<<<' after other token (IMPLEMENT '<<' INSTEAD)
+	
+<|		bash: syntax error near unexpected token `|'			token '|' after other token
+>>|		bash: syntax error near unexpected token `|'			token '|' after other token
+<<|		bash: syntax error near unexpected token `|'			token '|' after other token
+<<<|	bash: syntax error near unexpected token `|'			token '|' after other token
+>|		bash: syntax error near unexpected token `newline'		token '>|' at end of file (IMPLEMENT '|' INSTEAD)key=value
+
+|		bash: syntax error near unexpected token `|'			
+||		bash: syntax error near unexpected token `||'			token '||' after other token (IMPLEMENT '|' INSTEAD)
+|||		bash: syntax error near unexpected token `||'			token '||' after other token (IMPLEMENT '|' INSTEAD)
+||||	bash: syntax error near unexpected token `||'			token '||' after other token (IMPLEMENT '|' INSTEAD)
+
+
+Commands that must handle 0 to ARG_MAX arguments :
+echo	[-n] [STRING]...
+export	name[=word]...
+unset	name...
+
+Commands that must handle 0 to 1 arguments :
+exit	[n]
+cd		[directory] // relative OR absolute path
+
+Commands that takes no arguments :
+pwd
+env
+
+CORRECT SYNTAXES :
+ls > file1 -n > file2 -l > file3 -h
