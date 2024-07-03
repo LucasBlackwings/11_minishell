@@ -6,7 +6,7 @@
 /*   By: lahlsweh <lahlsweh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 14:09:24 by lahlsweh          #+#    #+#             */
-/*   Updated: 2024/06/29 10:15:31 by lahlsweh         ###   ########.fr       */
+/*   Updated: 2024/07/03 10:46:57 by lahlsweh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,8 @@ static int	count_words(char *str)
 				{
 					i++;
 					while (str[i] && str[i] != '\'')
-						i++;
+						i++;		//filepath = ft_strjoin(array_of_paths[i], "/");
+		//filepath = ft_strjoin(filepath, filename);
 				}
 				if (str[i] == '\"')
 				{

@@ -6,7 +6,7 @@
 /*   By: lahlsweh <lahlsweh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 12:35:06 by lahlsweh          #+#    #+#             */
-/*   Updated: 2024/07/02 15:08:13 by lahlsweh         ###   ########.fr       */
+/*   Updated: 2024/07/03 10:45:02 by lahlsweh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,11 @@ int		unbuilt_exit_syntax(char **array, int i);
 int		unbuilt_cd_syntax(char **array, int i);
 int		unbuilt_pwd_syntax(char **array, int i);
 int		unbuilt_env_syntax(char **array, int i);
+
+void	*ft_calloc(size_t nmemb, size_t size);
+void	ft_bzero(void *s, size_t n);
+char	*ft_strjoin(const char *s1, const char *s2);
+char	*ft_str3join(const char *s1, const char *s2, const char *s3);
+size_t	ft_strlcat(char *dst, const char *src, size_t size);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: lahlsweh <lahlsweh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/22 10:56:31 by lahlsweh          #+#    #+#             */
-/*   Updated: 2024/07/02 15:17:26 by lahlsweh         ###   ########.fr       */
+/*   Updated: 2024/07/03 11:31:14 by lahlsweh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,12 +90,13 @@ static void	build_tokens_list(char **array, int *list_words);
 static void	parsing_trimmer(char **array);
 static int	check_file_syntax(char **array, int *list_words);
 static int	check_bad_inbuilts_syntax(char **array);
+static int	lookup_file_path(char **array_of_paths, char *filename);
 
 void	parsing_interpreter(char **array)
 {
 	int *list_words;
 	int	i;
-
+	
 	i = 0;
 	printf("\n");
 	printf("END_OF_LIST 0\nPIPE 1\nREDIR_OUT 2\nREDIR_IN 3\nAPPEND_REDIR_OUT 4\nHERE_DOC 5\nFILE_OR_COMMAND 6\nARG_OR_OPTION 7\nUNKNOWN -1\n\n");
@@ -121,8 +122,6 @@ void	parsing_interpreter(char **array)
 	printf("{%d} [%d] %s\n\n", list_words[i], i, array[i]);
 	if ((check_file_syntax(array, list_words)) == -1)
 		return ;
-	//if ((check_bad_inbuilts_syntax(array)) == -1)
-	//	return ;
 	free(list_words);
 	return ;
 }
@@ -251,8 +250,15 @@ static int	check_file_syntax(char **array, int *list_words)
 		i++;
 	}
 	printf("[%d] %s |\n", i, path_array[i]);
-	// Look for PATH file
-	// Look for CWD file
+	i = 0;
+	while (list_words[i])
+	{
+		if (list_words[i] == FILE_OR_COMMAND)
+		{
+			lookup_file_path(path_array, array[i]);
+		}
+		i++;
+	}
 	while (path_array[i])
 	{
 		free(path_array[i]);
@@ -289,7 +295,7 @@ static int	check_bad_inbuilts_syntax(char **array)
 		}
 		else if (array[i][0] == 'e' && array[i][1] == 'c' && array[i][2] == 'h' && array[i][3] == 'o' && array[i][4] == '\0')
 		{
-			i += unbuilt_echo_syntax(array, i);
+			i += unbuilt_echo_syntax(array, i);FILEPATH[0] = /home/lahlsweh/.local/funcheck/host/
 		}
 		else if (array[i][0] == 'e' && array[i][1] == 'x' && array[i][2] == 'i' && array[i][3] == 't' && array[i][4] == '\0')
 		{
@@ -310,4 +316,26 @@ static int	check_bad_inbuilts_syntax(char **array)
 			i++;
 	}
 	return (0);
+}
+
+static int	lookup_file_path(char **array_of_paths, char *filename)
+{
+	char	*filepath;
+	int		i;
+
+	i = 0;
+	while (array_of_paths[i])
+	{
+		filepath = ft_str3join(array_of_paths[i], "/", filename);
+		printf("FILEPATH[%d] = %s\n", i, filepath);
+		if (access(filepath, X_OK) == 0)
+		{
+			free(filepath);
+			return (TRUE);
+		}
+		free(filepath);
+		i++;
+	}
+	printf("%s: command not found\n", filename);
+	return (FALSE);
 }
