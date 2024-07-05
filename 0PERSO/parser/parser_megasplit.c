@@ -6,7 +6,7 @@
 /*   By: lahlsweh <lahlsweh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 14:09:24 by lahlsweh          #+#    #+#             */
-/*   Updated: 2024/07/05 11:47:28 by lahlsweh         ###   ########.fr       */
+/*   Updated: 2024/07/05 13:04:20 by lahlsweh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ char	**parsing_megasplit_control(char *str)
 		}
 		else if (str[i] && ft_c_search_str(str[i], " \t|><") == 0)
 		{
-			printf("test\n");
 			array[j] = make_word(str + i);
 			j++;
 			while (str[i] && ft_c_search_str(str[i], " \t|><") == 0)

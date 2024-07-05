@@ -6,11 +6,15 @@
 /*   By: lahlsweh <lahlsweh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 11:56:55 by lahlsweh          #+#    #+#             */
-/*   Updated: 2024/07/03 13:07:35 by lahlsweh         ###   ########.fr       */
+/*   Updated: 2024/07/05 14:17:54 by lahlsweh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+/*
+WARNING : NO files and functions in current build are protected yet
+*/
 
 int	main(void)
 {

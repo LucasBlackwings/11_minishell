@@ -6,7 +6,7 @@
 /*   By: lahlsweh <lahlsweh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 12:34:36 by lahlsweh          #+#    #+#             */
-/*   Updated: 2024/07/05 10:53:06 by lahlsweh         ###   ########.fr       */
+/*   Updated: 2024/07/05 13:26:58 by lahlsweh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ char	*trim_pwd_env_if_home_user(char *user_env, char *pwd_env)
 	int	user_env_len;
 	int	i;
 
-	//if (pwd_env[0] == '/' && pwd_env[1] == 'h' && pwd_env[2] == 'o' && pwd_env[3] == 'm' && pwd_env[4] == 'e' && pwd_env[5] == '/')
 	if (ft_strncmp(pwd_env, "/home/", 6) == 0)
 	{
 		user_env_len = 0;

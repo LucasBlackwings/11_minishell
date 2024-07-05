@@ -12,6 +12,7 @@ SOURCES =	main.c \
 			./parser/parser_inbuilts_syntax.c \
 			./parser/parser_utils.c \
 			./utils/utils_minisplit.c \
+			./utils/utils_printf_error.c \
 			./utils/utils_libft_utils.c \
 
 OBJECTS = $(SOURCES:.c=.o)

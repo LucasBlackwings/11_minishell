@@ -18,7 +18,7 @@ int	unbuilt_cd_syntax(char **array, int i)
 
 	words_handled = 1;
 	i += 1;
-	printf("Inbuilt command found : cd\n\n");
+	printf("Inbuilt command found : cd\n");
 	if (array[i] && ft_str_search_str(array[i], "|><") == 0)
 	{
 		printf("Argument found : %s\n", array[i]);
@@ -26,9 +26,7 @@ int	unbuilt_cd_syntax(char **array, int i)
 		i++;
 	}
 	if (array[i] && ft_str_search_str(array[i], "|><") == 0)
-	{
-		return (printf("bash: cd: too many arguments\n\n"), -1);
-	}
+		return (printf_error(ERR_CD_ARGS), -1);
 	return (words_handled - 1);
 }
 
@@ -38,7 +36,7 @@ int	unbuilt_pwd_syntax(char **array, int i)
 
 	words_handled = 1;
 	i += 1;
-	printf("Inbuilt command found : pwd\n\n");
+	printf("Inbuilt command found : pwd\n");
 	while (array[i] && ft_str_search_str(array[i], "|><") == 0)
 	{
 		words_handled++;
@@ -53,11 +51,9 @@ int	unbuilt_env_syntax(char **array, int i)
 
 	words_handled = 1;
 	i += 1;
-	printf("Inbuilt command found : env\n\n");
+	printf("Inbuilt command found : env\n");
 	if (array[i] && ft_str_search_str(array[i], "|><") == 0)
-	{
-		return (printf("bash: env: too many arguments\n\n"), -1);
-	}
+		return (printf_error(ERR_ENV_ARGS), -1);
 	return (words_handled - 1);
 }
 
@@ -67,8 +63,7 @@ int	unbuilt_echo_syntax(char **array, int i)
 
 	words_handled = 1;
 	i += 1;
-	printf("Inbuilt command found : echo\n\n");
-	if (array[i] && array[i][0] == '-' && array[i][1] == 'n' && array[i][2] == '\0')
+	printf("Inbuilt command found : echo\n");
 	if (array[i] && ft_strncmp(array[i], "-n", 3) == 0)
 	{
 		printf("Option \"-n\" has been set!\n");
@@ -90,7 +85,7 @@ int	unbuilt_exit_syntax(char **array, int i)
 
 	words_handled = 1;
 	i += 1;
-	printf("Inbuilt command found : exit\n\n");
+	printf("Inbuilt command found : exit\n");
 	if (array[i] && ft_str_search_str(array[i], "|><") == 0)
 	{
 		printf("Argument found : %s\n", array[i]);
@@ -98,9 +93,7 @@ int	unbuilt_exit_syntax(char **array, int i)
 		i++;
 	}
 	if (array[i] && ft_str_search_str(array[i], "|><") == 0)
-	{
-		return (printf("bash: exit: too many arguments\n\n"), -1);
-	}
+		return (printf_error(ERR_EXIT_ARGS), -1);
 	return (words_handled - 1);
 }
 
@@ -110,7 +103,7 @@ int	unbuilt_unset_syntax(char **array, int i)
 
 	words_handled = 1;
 	i += 1;
-	printf("Inbuilt command found : unset\n\n");
+	printf("Inbuilt command found : unset\n");
 	while (array[i] && ft_str_search_str(array[i], "|><") == 0)
 	{
 		printf("Argument found : %s\n", array[i]);
@@ -126,7 +119,7 @@ int	unbuilt_export_syntax(char **array, int i)
 
 	words_handled = 1;
 	i += 1;
-	printf("Inbuilt command found : export\n\n");
+	printf("Inbuilt command found : export\n");
 	while (array[i] && ft_str_search_str(array[i], "|><") == 0)
 	{
 		printf("Argument found : %s\n", array[i]);

@@ -6,7 +6,7 @@
 /*   By: lahlsweh <lahlsweh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 12:35:06 by lahlsweh          #+#    #+#             */
-/*   Updated: 2024/07/05 11:46:54 by lahlsweh         ###   ########.fr       */
+/*   Updated: 2024/07/05 12:46:17 by lahlsweh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,17 @@
 # define FILE_OR_COMMAND 6
 # define ARG_OR_OPTION 7
 # define UNKNOWN -1
+
+// printf_error() macros */
+# define ERR_PIPE 11
+# define ERR_REDIR_OUT 12 
+# define ERR_REDIR_IN 13
+# define ERR_APPEND_REDIR_OUT 14
+# define ERR_HERE_DOC 15
+# define ERR_NEWLINE 16
+# define ERR_CD_ARGS 17
+# define ERR_ENV_ARGS 18
+# define ERR_EXIT_ARGS 19
 
 /* PROMPT */
 char	*build_prompt_control(void);
@@ -95,5 +106,8 @@ size_t	ft_strlcat(char *dst, const char *src, size_t size);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 int		ft_str_search_str(char *str1, char *str2);
 int		ft_c_search_str(char c, char *str);
+
+/* UTILS print_errors */
+void	printf_error(int status);
 
 #endif

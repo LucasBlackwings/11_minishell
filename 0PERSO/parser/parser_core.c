@@ -6,7 +6,7 @@
 /*   By: lahlsweh <lahlsweh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/22 10:56:31 by lahlsweh          #+#    #+#             */
-/*   Updated: 2024/07/05 10:52:20 by lahlsweh         ###   ########.fr       */
+/*   Updated: 2024/07/05 14:16:05 by lahlsweh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,28 +18,28 @@ int	check_token_syntax(char **array)
 
 	i = 0;
 	if (array[0][0] == '|')
-		return (printf("bash: syntax error near unexpected token `|'\n"), -1);
+		return (printf_error(ERR_PIPE), -1);
 	while (array[i] && array[i + 1])
 	{
-		if (array[i][0] == '|' || array[i][0] == '>' || array[i][0] == '<')
+		if (ft_str_search_str(array[i], "|><") == 1)
 		{
-			if (array[i + 1][0] == '>' && array[i + 1][1] == '>')
-				return (printf("bash: syntax error near unexpected token `>>'\n"), -1);
-			else if (array[i + 1][0] == '>')
-				return (printf("bash: syntax error near unexpected token `>'\n"), -1);
-			else if (array[i + 1][0] == '<' && array[i + 1][1] == '<')
-				return (printf("bash: syntax error near unexpected token `<<'\n"), -1);
-			else if (array[i + 1][0] == '<')
-				return (printf("bash: syntax error near unexpected token `<'\n"), -1);
-			else if (array[i + 1][0] == '|')
-				return (printf("bash: syntax error near unexpected token `|'\n"), -1);
+			if (ft_strncmp(array[i + 1], ">>", 3) == 0)
+				return (printf_error(ERR_APPEND_REDIR_OUT), -1);
+			else if (ft_strncmp(array[i + 1], ">", 2) == 0)
+				return (printf_error(ERR_REDIR_OUT), -1);
+			else if (ft_strncmp(array[i + 1], "<<", 3) == 0)
+				return (printf_error(ERR_HERE_DOC), -1);
+			else if (ft_strncmp(array[i + 1], "<", 2) == 0)
+				return (printf_error(ERR_REDIR_IN), -1);
+			else if (ft_strncmp(array[i + 1], "|", 2) == 0)
+				return (printf_error(ERR_PIPE), -1);
 		}
 		i++;
 	}
 	if (array[i][0] == '>' || array[i][0] == '<')
-		return (printf("bash: syntax error near unexpected token `newline'\n"), -1);
+		return (printf_error(ERR_NEWLINE), -1);
 	if (array[i][0] == '|' && i == 1)
-		return (printf("bash: syntax error near unexpected token `|'\n"), -1);
+		return (printf_error(ERR_PIPE), -1);
 	return (0);
 }
 
@@ -52,15 +52,15 @@ void	build_tokens_list(char **array, int *list_words)
 	i = 0;
 	while (array[i])
 	{
-		if (array[i][0] == '|' && array[i][1] == '\0')
+		if (ft_strncmp(array[i], "|", 2) == 0)
 			list_words[i] = PIPE;
-		else if (array[i][0] == '>' && array[i][1] == '\0')
+		else if (ft_strncmp(array[i], ">", 2) == 0)
 			list_words[i] = REDIR_OUT;
-		else if (array[i][0] == '<' && array[i][1] == '\0')
+		else if (ft_strncmp(array[i], "<", 2) == 0)
 			list_words[i] = REDIR_IN;
-		else if (array[i][0] == '>' && array[i][1] == '>' && array[i][2] == '\0')
+		else if (ft_strncmp(array[i], ">>", 3) == 0)
 			list_words[i] = APPEND_REDIR_OUT;
-		else if (array[i][0] == '<' && array[i][1] == '<' && array[i][2] == '\0')
+		else if (ft_strncmp(array[i], "<<", 3) == 0)
 			list_words[i] = HERE_DOC;
 		else
 			list_words[i] = UNKNOWN;
