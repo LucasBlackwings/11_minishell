@@ -2,7 +2,7 @@ NAME = minishell
 CC = cc
 CFLAGS = -lreadline -Wall -Wextra -Werror -g3 -std=c99 -pedantic -fsanitize=leak -fsanitize=address -fsanitize=undefined
 OFLAGS = -Wall -Wextra -Werror -g3 -std=c99 -pedantic -fsanitize=leak -fsanitize=address -fsanitize=undefined
-# clear && make re && make clean && clear && ./minishell
+# make re && make clean && clear && ./minishell
 
 SOURCES =	main.c \
 			./prompt/build_prompt.c \

@@ -6,7 +6,7 @@
 /*   By: lahlsweh <lahlsweh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 13:53:22 by lahlsweh          #+#    #+#             */
-/*   Updated: 2024/07/03 14:16:20 by lahlsweh         ###   ########.fr       */
+/*   Updated: 2024/07/05 11:35:18 by lahlsweh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ int	parser_check_file_path(char **array_of_paths, char *filename)
 	while (array_of_paths[i])
 	{
 		filepath = ft_strcstrjoin(array_of_paths[i], '/', filename);
-		//printf("PATH[%d] = %s\n", i, filepath);
 		if (access(filepath, X_OK) == 0)
 		{
 			printf("\nCommand %s found in : %s\n\n", filename, filepath);

@@ -6,7 +6,7 @@
 /*   By: lahlsweh <lahlsweh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 14:09:24 by lahlsweh          #+#    #+#             */
-/*   Updated: 2024/07/03 14:03:04 by lahlsweh         ###   ########.fr       */
+/*   Updated: 2024/07/05 11:47:28 by lahlsweh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,12 @@ char	**parsing_megasplit_control(char *str)
 			if (str[i] == '<')
 				i++;
 		}
-		else if (str[i] && str[i] != ' ' && str[i] != '\t' && str[i] != '|' && str[i] != '>' && str[i] != '<' && str[i] != '\0')
+		else if (str[i] && ft_c_search_str(str[i], " \t|><") == 0)
 		{
+			printf("test\n");
 			array[j] = make_word(str + i);
 			j++;
-			while (str[i] && str[i] != ' ' && str[i] != '\t' && str[i] != '|' && str[i] != '>' && str[i] != '<')
+			while (str[i] && ft_c_search_str(str[i], " \t|><") == 0)
 			{
 				if (str[i] == '\'')
 				{
@@ -106,9 +107,9 @@ int	count_words(char *str)
 				i++;
 			num_words++;
 		}
-		else if (str[i] && str[i] != ' ' && str[i] != '\t' && str[i] != '\0')
+		else if (str[i] && str[i] != ' ' && str[i] != '\t')
 		{
-			while (str[i] && str[i] != ' ' && str[i] != '\t' && str[i] != '|' && str[i] != '>' && str[i] != '<')
+			while (str[i] && ft_c_search_str(str[i], " \t|><") == 0)
 			{
 				if (str[i] == '\'')
 				{
@@ -170,7 +171,7 @@ int	count_word_len(char *str)
 	}
 	else
 	{
-		while (str[i] && str[i] != ' ' && str[i] != '\t' && str[i] != '|' && str[i] != '>' && str[i] != '<')
+		while (str[i] && ft_c_search_str(str[i], " \t|><") == 0)
 		{
 			if (str[i] == '\'')
 			{

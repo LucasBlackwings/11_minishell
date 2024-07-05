@@ -3,6 +3,7 @@ https://user-images.githubusercontent.com/68693691/193665518-0c0c7fec-38a9-4f6c-
 
 
 /*Funny commands :
+"e"'ch'"o" '-n' 't'"es"'t'1 test2 > 'exp'"ort" test3 test4 < u'n's"e"t t'es't"5" 'te's"t6" >> e'x'i"t" 255 | 'c'"d" .. >> 'pw'"d" < e'n'"v"
 > grep echo grep && < grep grep grep | cat
 grep < output -V < output2 -E < output3 -i
 grep > output -V > output2 -E > output3 -i

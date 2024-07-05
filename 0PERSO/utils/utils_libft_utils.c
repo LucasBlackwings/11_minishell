@@ -6,7 +6,7 @@
 /*   By: lahlsweh <lahlsweh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 10:29:03 by lahlsweh          #+#    #+#             */
-/*   Updated: 2024/07/03 14:09:17 by lahlsweh         ###   ########.fr       */
+/*   Updated: 2024/07/05 11:51:29 by lahlsweh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,55 +42,6 @@ void	ft_bzero(void *s, size_t n)
 		n--;
 	}
 }
-
-/*char	*ft_strjoin(const char *s1, const char *s2)
-{
-	int		s1_len;
-	int		s2_len;
-	char	*calloc_ptr;
-
-	if (!s1 || !s2)
-		return (NULL);
-	s1_len = 0;
-	s2_len = 0;
-	while (s1[s1_len])
-		s1_len++;
-	while (s2[s2_len])
-		s2_len++;
-	calloc_ptr = (char *)ft_calloc(s1_len + s2_len + 1, sizeof(char));
-	if (!calloc_ptr)
-		return (NULL);
-	ft_strlcat(calloc_ptr, s1, s1_len + 1);
-	ft_strlcat(calloc_ptr, s2, s1_len + s2_len + 1);
-	return (calloc_ptr);
-}
-
-char	*ft_3strjoin(const char *s1, const char *s2, const char *s3)
-{
-	int		s1_len;
-	int		s2_len;
-	int		s3_len;
-	char	*calloc_ptr;
-
-	if (!s1 || !s2 || !s3)
-		return (NULL);
-	s1_len = 0;
-	s2_len = 0;
-	s3_len = 0;
-	while (s1[s1_len])
-		s1_len++;
-	while (s2[s2_len])
-		s2_len++;
-	while (s3[s3_len])
-		s3_len++;
-	calloc_ptr = (char *)ft_calloc(s1_len + s2_len + s3_len + 1, sizeof(char));
-	if (!calloc_ptr)
-		return (NULL);
-	ft_strlcat(calloc_ptr, s1, s1_len + 1);
-	ft_strlcat(calloc_ptr, s2, s1_len + s2_len + 1);
-	ft_strlcat(calloc_ptr, s3, s1_len + s2_len + s3_len + 1);
-	return (calloc_ptr);
-}*/
 
 char	*ft_strcstrjoin(const char *s1, const char c2, const char *s3)
 {
@@ -139,4 +90,65 @@ size_t	ft_strlcat(char *dst, const char *src, size_t size)
 	if (size <= dst_len)
 		return (src_len + size);
 	return (src_len + dst_len);
+}
+
+/* Use to compare two strings s1 and s2
+Returns (0) if s1=s2, return (>0) otherwise */
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
+{
+	unsigned char	*s1_ptr;
+	unsigned char	*s2_ptr;
+	size_t			i;
+
+	s1_ptr = (unsigned char *)s1;
+	s2_ptr = (unsigned char *)s2;
+	i = 0;
+	if (n <= 0)
+		return (0);
+	while (s1_ptr[i] && s2_ptr[i] && i < (n - 1))
+	{
+		if (s1_ptr[i] != s2_ptr[i])
+			return (s1_ptr[i] - s2_ptr[i]);
+		i++;
+	}
+	return (s1_ptr[i] - s2_ptr[i]);
+}
+
+/* Use to compare two strings str1 and str2
+Returns (0) if s1=s2, return (>0) otherwise */
+int	ft_str_search_str(char *str1, char *str2)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (str1[i])
+	{
+		j = 0;
+		while (str2[j])
+		{
+			if (str1[i] == str2[j])
+				return (1);
+			j++;
+		}
+		i++;
+	}
+	return (0);
+}
+
+/* Use to compare a char c with a string str 
+Returns (1) if c is equal to any character in str
+Returns (0) otherwise */
+int	ft_c_search_str(char c, char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == c)
+			return (1);
+		i++;
+	}
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: lahlsweh <lahlsweh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/22 10:56:31 by lahlsweh          #+#    #+#             */
-/*   Updated: 2024/07/03 14:20:52 by lahlsweh         ###   ########.fr       */
+/*   Updated: 2024/07/05 10:52:20 by lahlsweh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,38 +137,37 @@ int	check_file_syntax(char **array, int *list_words)
 	i = 0;
 	while (array[i])
 	{
-		if (array[i][0] == 'c' && array[i][1] == 'd' && array[i][2] == '\0')
+		if (ft_strncmp(array[i], "cd", 3) == 0)
 		{
 			i += unbuilt_cd_syntax(array, i);
 			if (i == -1)
 				return (-1);
 		}
-		else if (array[i][0] == 'p' && array[i][1] == 'w' && array[i][2] == 'd' && array[i][3] == '\0')
+		else if (ft_strncmp(array[i], "pwd", 4) == 0)
 		{
 			i += unbuilt_pwd_syntax(array, i);
 		}
-		else if (array[i][0] == 'e' && array[i][1] == 'n' && array[i][2] == 'v' && array[i][3] == '\0')
+		else if (ft_strncmp(array[i], "env", 4) == 0)
 		{
 			i += unbuilt_env_syntax(array, i);
 			if (i == -1)
 				return (-1);
 		}
-		else if (array[i][0] == 'e' && array[i][1] == 'c' && array[i][2] == 'h' && array[i][3] == 'o' && array[i][4] == '\0')
+		else if (ft_strncmp(array[i], "echo", 5) == 0)
 		{
 			i += unbuilt_echo_syntax(array, i);
 		}
-		else if (array[i][0] == 'e' && array[i][1] == 'x' && array[i][2] == 'i' && array[i][3] == 't' && array[i][4] == '\0')
+		else if (ft_strncmp(array[i], "exit", 5) == 0)
 		{
 			i += unbuilt_exit_syntax(array, i);
 			if (i == -1)
 				return (-1);
 		}
-		else if (array[i][0] == 'u' && array[i][1] == 'n' && array[i][2] == 's' && array[i][3] == 'e' && array[i][4] == 't' && array[i][5] == '\0')
+		else if (ft_strncmp(array[i], "unset", 6) == 0)
 		{
 			i += unbuilt_unset_syntax(array, i);
 		}
-		else if (array[i][0] == 'e' && array[i][1] == 'x' && array[i][2] == 'p' && array[i][3] == 'o'
-				&& array[i][4] == 'r' && array[i][5] == 't' && array[i][6] == '\0')
+		else if (ft_strncmp(array[i], "export", 7) == 0)
 		{
 			i += unbuilt_export_syntax(array, i);
 		}

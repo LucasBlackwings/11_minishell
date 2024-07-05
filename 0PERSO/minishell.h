@@ -6,7 +6,7 @@
 /*   By: lahlsweh <lahlsweh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 12:35:06 by lahlsweh          #+#    #+#             */
-/*   Updated: 2024/07/03 14:22:39 by lahlsweh         ###   ########.fr       */
+/*   Updated: 2024/07/05 11:46:54 by lahlsweh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,15 +83,17 @@ int		unbuilt_export_syntax(char **array, int i);
 /* PARSER utils */
 int		parser_check_file_path(char **array_of_paths, char *filename);
 
-/* UTILS minishell */
-char	*ft_strcstrjoin(const char *s1, const char c2, const char *s3);
+/* UTILS minisplit */
+char	**mini_split(char *str, char c);
+char	*mini_make_word(char *str, char c);
 
 /* UTILS libft*/
 void	*ft_calloc(size_t nmemb, size_t size);
 void	ft_bzero(void *s, size_t n);
-char	**mini_split(char *str, char c);
-char	*mini_make_word(char *str, char c);
-//char	*ft_strjoin(const char *s1, const char *s2);
+char	*ft_strcstrjoin(const char *s1, const char c2, const char *s3);
 size_t	ft_strlcat(char *dst, const char *src, size_t size);
+int		ft_strncmp(const char *s1, const char *s2, size_t n);
+int		ft_str_search_str(char *str1, char *str2);
+int		ft_c_search_str(char c, char *str);
 
 #endif
