@@ -6,7 +6,7 @@
 /*   By: lahlsweh <lahlsweh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 10:29:03 by lahlsweh          #+#    #+#             */
-/*   Updated: 2024/07/05 11:51:29 by lahlsweh         ###   ########.fr       */
+/*   Updated: 2024/07/05 12:04:06 by lahlsweh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,8 +92,8 @@ size_t	ft_strlcat(char *dst, const char *src, size_t size)
 	return (src_len + dst_len);
 }
 
-/* Use to compare two strings s1 and s2
-Returns (0) if s1=s2, return (>0) otherwise */
+/* Use to compare n characters in two strings s1 and s2
+Returns (0) if s1 = s2, return (>0) otherwise */
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
 	unsigned char	*s1_ptr;
@@ -115,7 +115,8 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 }
 
 /* Use to compare two strings str1 and str2
-Returns (0) if s1=s2, return (>0) otherwise */
+Returns (1) if str1 and str2 have any character in common
+Returns (0) otherwise */
 int	ft_str_search_str(char *str1, char *str2)
 {
 	int	i;
@@ -137,7 +138,7 @@ int	ft_str_search_str(char *str1, char *str2)
 }
 
 /* Use to compare a char c with a string str 
-Returns (1) if c is equal to any character in str
+Returns (1) if any character from str is found in c
 Returns (0) otherwise */
 int	ft_c_search_str(char c, char *str)
 {
