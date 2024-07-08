@@ -6,7 +6,7 @@
 /*   By: lahlsweh <lahlsweh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/22 10:56:31 by lahlsweh          #+#    #+#             */
-/*   Updated: 2024/07/05 14:16:05 by lahlsweh         ###   ########.fr       */
+/*   Updated: 2024/07/08 12:04:17 by lahlsweh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,20 @@ int	check_token_syntax(char **array)
 		return (printf_error(ERR_PIPE), -1);
 	while (array[i] && array[i + 1])
 	{
-		if (ft_str_search_str(array[i], "|><") == 1)
+		if (str_search_str(array[i], "|><") == 1)
 		{
-			if (ft_strncmp(array[i + 1], ">>", 3) == 0)
+			if (ft_strncmp(array[i + 1], ">>", 2) == 0)
+			{
+				printf("TEST\n");
 				return (printf_error(ERR_APPEND_REDIR_OUT), -1);
-			else if (ft_strncmp(array[i + 1], ">", 2) == 0)
+			}
+			else if (ft_strncmp(array[i + 1], ">", 1) == 0)
 				return (printf_error(ERR_REDIR_OUT), -1);
-			else if (ft_strncmp(array[i + 1], "<<", 3) == 0)
+			else if (ft_strncmp(array[i + 1], "<<", 2) == 0)
 				return (printf_error(ERR_HERE_DOC), -1);
-			else if (ft_strncmp(array[i + 1], "<", 2) == 0)
+			else if (ft_strncmp(array[i + 1], "<", 1) == 0)
 				return (printf_error(ERR_REDIR_IN), -1);
-			else if (ft_strncmp(array[i + 1], "|", 2) == 0)
+			else if (ft_strncmp(array[i + 1], "|", 1) == 0)
 				return (printf_error(ERR_PIPE), -1);
 		}
 		i++;
@@ -52,15 +55,15 @@ void	build_tokens_list(char **array, int *list_words)
 	i = 0;
 	while (array[i])
 	{
-		if (ft_strncmp(array[i], "|", 2) == 0)
+		if (ft_strncmp(array[i], "|", 1) == 0)
 			list_words[i] = PIPE;
-		else if (ft_strncmp(array[i], ">", 2) == 0)
+		else if (ft_strncmp(array[i], ">", 1) == 0)
 			list_words[i] = REDIR_OUT;
-		else if (ft_strncmp(array[i], "<", 2) == 0)
+		else if (ft_strncmp(array[i], "<", 1) == 0)
 			list_words[i] = REDIR_IN;
-		else if (ft_strncmp(array[i], ">>", 3) == 0)
+		else if (ft_strncmp(array[i], ">>", 2) == 0)
 			list_words[i] = APPEND_REDIR_OUT;
-		else if (ft_strncmp(array[i], "<<", 3) == 0)
+		else if (ft_strncmp(array[i], "<<", 2) == 0)
 			list_words[i] = HERE_DOC;
 		else
 			list_words[i] = UNKNOWN;
@@ -137,37 +140,37 @@ int	check_file_syntax(char **array, int *list_words)
 	i = 0;
 	while (array[i])
 	{
-		if (ft_strncmp(array[i], "cd", 3) == 0)
+		if (ft_strncmp(array[i], "cd", 2) == 0)
 		{
 			i += unbuilt_cd_syntax(array, i);
 			if (i == -1)
 				return (-1);
 		}
-		else if (ft_strncmp(array[i], "pwd", 4) == 0)
+		else if (ft_strncmp(array[i], "pwd", 3) == 0)
 		{
 			i += unbuilt_pwd_syntax(array, i);
 		}
-		else if (ft_strncmp(array[i], "env", 4) == 0)
+		else if (ft_strncmp(array[i], "env", 3) == 0)
 		{
 			i += unbuilt_env_syntax(array, i);
 			if (i == -1)
 				return (-1);
 		}
-		else if (ft_strncmp(array[i], "echo", 5) == 0)
+		else if (ft_strncmp(array[i], "echo", 4) == 0)
 		{
 			i += unbuilt_echo_syntax(array, i);
 		}
-		else if (ft_strncmp(array[i], "exit", 5) == 0)
+		else if (ft_strncmp(array[i], "exit", 4) == 0)
 		{
 			i += unbuilt_exit_syntax(array, i);
 			if (i == -1)
 				return (-1);
 		}
-		else if (ft_strncmp(array[i], "unset", 6) == 0)
+		else if (ft_strncmp(array[i], "unset", 5) == 0)
 		{
 			i += unbuilt_unset_syntax(array, i);
 		}
-		else if (ft_strncmp(array[i], "export", 7) == 0)
+		else if (ft_strncmp(array[i], "export", 6) == 0)
 		{
 			i += unbuilt_export_syntax(array, i);
 		}

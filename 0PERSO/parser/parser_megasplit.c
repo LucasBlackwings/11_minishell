@@ -6,7 +6,7 @@
 /*   By: lahlsweh <lahlsweh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 14:09:24 by lahlsweh          #+#    #+#             */
-/*   Updated: 2024/07/05 13:04:20 by lahlsweh         ###   ########.fr       */
+/*   Updated: 2024/07/08 11:33:27 by lahlsweh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,11 @@ char	**parsing_megasplit_control(char *str)
 			if (str[i] == '<')
 				i++;
 		}
-		else if (str[i] && ft_c_search_str(str[i], " \t|><") == 0)
+		else if (str[i] && str_search_c(" \t|><", str[i]) == 0)
 		{
 			array[j] = make_word(str + i);
 			j++;
-			while (str[i] && ft_c_search_str(str[i], " \t|><") == 0)
+			while (str[i] && str_search_c(" \t|><", str[i]) == 0)
 			{
 				if (str[i] == '\'')
 				{
@@ -108,7 +108,7 @@ int	count_words(char *str)
 		}
 		else if (str[i] && str[i] != ' ' && str[i] != '\t')
 		{
-			while (str[i] && ft_c_search_str(str[i], " \t|><") == 0)
+			while (str[i] && str_search_c(" \t|><", str[i]) == 0)
 			{
 				if (str[i] == '\'')
 				{
@@ -170,7 +170,7 @@ int	count_word_len(char *str)
 	}
 	else
 	{
-		while (str[i] && ft_c_search_str(str[i], " \t|><") == 0)
+		while (str[i] && str_search_c(" \t|><", str[i]) == 0)
 		{
 			if (str[i] == '\'')
 			{

@@ -6,7 +6,7 @@
 /*   By: lahlsweh <lahlsweh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 12:35:06 by lahlsweh          #+#    #+#             */
-/*   Updated: 2024/07/05 12:46:17 by lahlsweh         ###   ########.fr       */
+/*   Updated: 2024/07/08 11:44:21 by lahlsweh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,18 +94,21 @@ int		unbuilt_export_syntax(char **array, int i);
 /* PARSER utils */
 int		parser_check_file_path(char **array_of_paths, char *filename);
 
-/* UTILS minisplit */
-char	**mini_split(char *str, char c);
-char	*mini_make_word(char *str, char c);
-
 /* UTILS libft*/
 void	*ft_calloc(size_t nmemb, size_t size);
 void	ft_bzero(void *s, size_t n);
-char	*ft_strcstrjoin(const char *s1, const char c2, const char *s3);
 size_t	ft_strlcat(char *dst, const char *src, size_t size);
-int		ft_strncmp(const char *s1, const char *s2, size_t n);
-int		ft_str_search_str(char *str1, char *str2);
-int		ft_c_search_str(char c, char *str);
+
+/* UTILS minishell */
+char	*ft_strcstrjoin(const char *str1, const char char2, const char *str3);
+int		ft_strncmp(const char *str1, const char *str2, const int num);
+int		ft_strcmp(const char *str1, const char *str2);
+int		str_search_str(const char *str1, const char *str2);
+int		str_search_c(const char *str1, const char char2);
+
+/* UTILS minisplit */
+char	**mini_split(char *str, char c);
+char	*mini_make_word(char *str, char c);
 
 /* UTILS print_errors */
 void	printf_error(int status);
