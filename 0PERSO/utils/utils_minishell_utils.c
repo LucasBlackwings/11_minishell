@@ -6,7 +6,7 @@
 /*   By: lahlsweh <lahlsweh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 10:22:43 by lahlsweh          #+#    #+#             */
-/*   Updated: 2024/07/08 12:09:04 by lahlsweh         ###   ########.fr       */
+/*   Updated: 2024/07/08 12:23:41 by lahlsweh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ char	*ft_strcstrjoin(const char *str1, const char char2, const char *str3)
 Returns (-1) if !str1 OR !str2 OR num < 1
 Returns (1) if str1 != str2
 Returns (1) if i < num AND one string still exists (while not the other)
-	This is to make so ft_strncmp("A", "AB", 2) == 1
+	Thi way ft_strncmp("A", "AB", 2) == 1 AND  ft_strncmp("A", "A", 2) == 0
 Returns (0) otherwise*/
 int	ft_strncmp(const char *str1, const char *str2, const int num)
 {
@@ -63,7 +63,7 @@ int	ft_strncmp(const char *str1, const char *str2, const int num)
 			return (1);
 		i++;
 	}
-	if (i < num && ((!str1[i] && str2[i]) || (!str1[i] && !str2[i])))
+	if (i < num && ((!str1[i] && str2[i]) || (str1[i] && !str2[i])))
 		return (1);
 	return (0);
 }
