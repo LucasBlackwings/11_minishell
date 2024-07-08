@@ -6,7 +6,7 @@
 /*   By: lahlsweh <lahlsweh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/22 10:56:31 by lahlsweh          #+#    #+#             */
-/*   Updated: 2024/07/08 12:04:17 by lahlsweh         ###   ########.fr       */
+/*   Updated: 2024/07/08 15:27:50 by lahlsweh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,7 @@ int	check_token_syntax(char **array)
 		if (str_search_str(array[i], "|><") == 1)
 		{
 			if (ft_strncmp(array[i + 1], ">>", 2) == 0)
-			{
-				printf("TEST\n");
 				return (printf_error(ERR_APPEND_REDIR_OUT), -1);
-			}
 			else if (ft_strncmp(array[i + 1], ">", 1) == 0)
 				return (printf_error(ERR_REDIR_OUT), -1);
 			else if (ft_strncmp(array[i + 1], "<<", 2) == 0)
@@ -129,6 +126,8 @@ int	check_file_syntax(char **array, int *list_words)
 	int		i;
 
 	path_env = getenv("PATH");
+	if (!path_env)
+		return (-1);
 	path_array = mini_split(path_env, ':');
 	i = 0;
 	while (path_array[i])

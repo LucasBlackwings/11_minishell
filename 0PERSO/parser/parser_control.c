@@ -6,7 +6,7 @@
 /*   By: lahlsweh <lahlsweh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 12:58:14 by lahlsweh          #+#    #+#             */
-/*   Updated: 2024/07/05 14:08:20 by lahlsweh         ###   ########.fr       */
+/*   Updated: 2024/07/08 15:27:04 by lahlsweh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ void	parser_control(char	*line_read)
 	int		i;
 
 	parsed_array = parsing_megasplit_control(line_read);
+	if (!parsed_array)
+		return ;
 	i = 0;
 	while (parsed_array[i])
 	{
@@ -34,8 +36,22 @@ void	parser_control(char	*line_read)
 	/* Write << EOF control HERE */
 	/****************************************/
 	if ((check_token_syntax(parsed_array)) == -1)
+	{
+		i = 0;
+		while (parsed_array[i])
+		{
+			free(parsed_array[i]);
+			i++;
+		}
+		free(parsed_array);
 		return ;
+	}
 	list_words = (int *)malloc((i + 1) * sizeof(int *));
+	if (!list_words)
+	{
+		free(parsed_array);
+		return ;
+	}
 	list_words[i] = END_OF_LIST;
 	build_tokens_list(parsed_array, list_words);
 	parsing_trimmer(parsed_array);

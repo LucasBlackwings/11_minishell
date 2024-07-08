@@ -6,7 +6,7 @@
 /*   By: lahlsweh <lahlsweh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 10:22:43 by lahlsweh          #+#    #+#             */
-/*   Updated: 2024/07/08 12:23:41 by lahlsweh         ###   ########.fr       */
+/*   Updated: 2024/07/08 13:35:41 by lahlsweh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,30 +42,6 @@ char	*ft_strcstrjoin(const char *str1, const char char2, const char *str3)
 	merged_str[str1_len] = char2;
 	ft_strlcat(merged_str, str3, str1_len + 1 + str3_len + 1);
 	return (merged_str);
-}
-
-/* Compare str1 and str2 up to num characters
-Returns (-1) if !str1 OR !str2 OR num < 1
-Returns (1) if str1 != str2
-Returns (1) if i < num AND one string still exists (while not the other)
-	Thi way ft_strncmp("A", "AB", 2) == 1 AND  ft_strncmp("A", "A", 2) == 0
-Returns (0) otherwise*/
-int	ft_strncmp(const char *str1, const char *str2, const int num)
-{
-	int	i;
-
-	if (!str1 || !str2 || num < 1)
-		return (-1);
-	i = 0;
-	while (str1[i] && str2[i] && i < num)
-	{
-		if (str1[i] != str2[i])
-			return (1);
-		i++;
-	}
-	if (i < num && ((!str1[i] && str2[i]) || (str1[i] && !str2[i])))
-		return (1);
-	return (0);
 }
 
 /* Compare str1 and str2

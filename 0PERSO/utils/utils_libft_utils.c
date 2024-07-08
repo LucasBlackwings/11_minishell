@@ -6,7 +6,7 @@
 /*   By: lahlsweh <lahlsweh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 10:29:03 by lahlsweh          #+#    #+#             */
-/*   Updated: 2024/07/08 12:10:14 by lahlsweh         ###   ########.fr       */
+/*   Updated: 2024/07/08 14:20:49 by lahlsweh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,4 +67,28 @@ size_t	ft_strlcat(char *dst, const char *src, size_t size)
 	if (size <= dst_len)
 		return (src_len + size);
 	return (src_len + dst_len);
+}
+
+/* Compare str1 and str2 up to num characters
+Returns (-1) if !str1 OR !str2 OR num < 1
+Returns (1) if str1 != str2
+Returns (1) if i < num AND one string still exists (while not the other)
+	Thi way ft_strncmp("A", "AB", 2) == 1 AND ft_strncmp("A", "A", 2) == 0
+Returns (0) otherwise*/
+int	ft_strncmp(const char *str1, const char *str2, const int num)
+{
+	int	i;
+
+	if (!str1 || !str2 || num < 1)
+		return (-1);
+	i = 0;
+	while (str1[i] && str2[i] && i < num)
+	{
+		if (str1[i] != str2[i])
+			return (1);
+		i++;
+	}
+	if (i < num && ((!str1[i] && str2[i]) || (str1[i] && !str2[i])))
+		return (1);
+	return (0);
 }

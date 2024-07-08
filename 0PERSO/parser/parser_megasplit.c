@@ -6,7 +6,7 @@
 /*   By: lahlsweh <lahlsweh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 14:09:24 by lahlsweh          #+#    #+#             */
-/*   Updated: 2024/07/08 11:33:27 by lahlsweh         ###   ########.fr       */
+/*   Updated: 2024/07/08 15:20:28 by lahlsweh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ char	**parsing_megasplit_control(char *str)
 
 	num_words = count_words(str);
 	array = (char **)malloc((num_words + 1) * sizeof(char *));
+	if (!array)
+		return (NULL);
 	i = 0;
 	j = 0;
 	while (str[i])
@@ -70,6 +72,14 @@ char	**parsing_megasplit_control(char *str)
 				if (str[i])
 					i++;
 			}
+		}
+		if (!array[j - 1])
+		{
+			j = 0;
+			while (array[j])
+				free(array[j++]);
+			free(array);
+			return (NULL);
 		}
 	}
 	array[j] = NULL;
@@ -139,6 +149,8 @@ char	*make_word(char *str)
 
 	word_len = count_word_len(str);
 	word = (char *)malloc((word_len + 1) * sizeof(char));
+	if (!word)
+		return (NULL);
 	i = 0;
 	while (i < word_len)
 	{

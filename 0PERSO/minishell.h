@@ -6,7 +6,7 @@
 /*   By: lahlsweh <lahlsweh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 12:35:06 by lahlsweh          #+#    #+#             */
-/*   Updated: 2024/07/08 11:44:21 by lahlsweh         ###   ########.fr       */
+/*   Updated: 2024/07/08 13:36:00 by lahlsweh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,10 +98,10 @@ int		parser_check_file_path(char **array_of_paths, char *filename);
 void	*ft_calloc(size_t nmemb, size_t size);
 void	ft_bzero(void *s, size_t n);
 size_t	ft_strlcat(char *dst, const char *src, size_t size);
+int		ft_strncmp(const char *str1, const char *str2, const int num);
 
 /* UTILS minishell */
 char	*ft_strcstrjoin(const char *str1, const char char2, const char *str3);
-int		ft_strncmp(const char *str1, const char *str2, const int num);
 int		ft_strcmp(const char *str1, const char *str2);
 int		str_search_str(const char *str1, const char *str2);
 int		str_search_c(const char *str1, const char char2);

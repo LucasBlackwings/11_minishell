@@ -6,7 +6,7 @@
 /*   By: lahlsweh <lahlsweh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 12:34:36 by lahlsweh          #+#    #+#             */
-/*   Updated: 2024/07/08 11:41:05 by lahlsweh         ###   ########.fr       */
+/*   Updated: 2024/07/08 14:49:45 by lahlsweh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,16 @@ char	*build_prompt_control(void)
 
 	user_env = getenv("USER");
 	pwd_env = getenv("PWD");
+	if (!user_env || !pwd_env)
+		return (NULL);
 	pwd_env = trim_pwd_env_if_home_user(user_env, pwd_env);
 	session_manager_env = trim_session_manager_env();
+	if (!session_manager_env)
+		return (NULL);
 	prompt_len = count_prompt_len(user_env, session_manager_env, pwd_env);
 	prompt = build_prompt(user_env, session_manager_env, pwd_env, prompt_len);
+	if (!prompt)
+		return (NULL);
 	return (prompt);
 }
 
@@ -58,6 +64,8 @@ char	*trim_session_manager_env(void)
 
 	i = 0;
 	session_manager_env = getenv("SESSION_MANAGER");
+	if (!session_manager_env)
+		return (NULL);
 	while (*session_manager_env != '/')
 		session_manager_env++;
 	session_manager_env++;
@@ -97,6 +105,8 @@ char	*build_prompt(char *user_env, char *session_manager_env, char *pwd_env, int
 	i = 0;
 	j = 0;
 	prompt = (char *)malloc(prompt_len * sizeof(char));
+	if (!prompt)
+		return (NULL);
 	while (user_env[j])
 	{
 		prompt[i] = user_env[j];

@@ -6,7 +6,7 @@
 /*   By: lahlsweh <lahlsweh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 14:57:15 by lahlsweh          #+#    #+#             */
-/*   Updated: 2024/07/03 14:12:42 by lahlsweh         ###   ########.fr       */
+/*   Updated: 2024/07/08 14:44:51 by lahlsweh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ char	**mini_split(char *str, char c)
 		i++;
 	}
 	array = (char **)malloc((num_words + 1) * sizeof(char *));
+	if (!array)
+		return (NULL);
 	i = 0;
 	j = 0;
 	while (str[i])
@@ -36,6 +38,14 @@ char	**mini_split(char *str, char c)
 		if (str[i] != c)
 		{
 			array[j] = mini_make_word(str + i, c);
+			if (!array[j])
+			{
+				j = 0;
+				while (array[j])
+					free(array[j++]);
+				free(array);
+				return (NULL);
+			}
 			j++;
 			while (str[i] && str[i] != c)
 				i++;
@@ -56,6 +66,8 @@ char	*mini_make_word(char *str, char c)
 	while (str[i] && str[i] != c)
 		i++;
 	word = (char *)malloc((i + 1) * sizeof(char));
+	if (!word)
+		return (NULL);
 	i = 0;
 	while (str[i] && str[i] != c)
 	{
